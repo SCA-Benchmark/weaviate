@@ -52,7 +52,7 @@ RUN go build -o /bin/grpc_health_probe .
 
 ###############################################################################
 # Weaviate (no differentiation between dev/test/prod - 12 factor!)
-FROM alpine AS weaviate
+FROM alpine:3.23.3 AS weaviate
 ENTRYPOINT ["/bin/weaviate"]
 COPY --from=grpc_health_probe_builder /bin/grpc_health_probe /bin/
 COPY --from=server_builder /weaviate-server /bin/weaviate
